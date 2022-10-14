@@ -14,18 +14,23 @@ export class App extends Component {
   };
 
   onLeaveFeedback = event => {
-    this.setState(prevState => ({
-      [event.target.value]: prevState[event.target.value] + 1,
+    const { value } = event.target;
+    return this.setState(prevState => ({
+      [value]: prevState[value] + 1,
     }));
   };
 
-  countTotalFeedback = () =>
-    this.state.good + this.state.neutral + this.state.bad;
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
 
   countPositiveFeedbackPercentage = () =>
     Math.floor((this.state.good / this.countTotalFeedback()) * 100);
 
   render() {
+    const { good, neutral, bad } = this.state;
+
     return (
       <>
         <Box
@@ -47,9 +52,9 @@ export class App extends Component {
           <Section title={'Statistics'}>
             {this.countTotalFeedback() > 0 ? (
               <Statistics
-                good={this.state.good}
-                neutral={this.state.neutral}
-                bad={this.state.bad}
+                good={good}
+                neutral={neutral}
+                bad={bad}
                 total={this.countTotalFeedback()}
                 positivePercentage={this.countPositiveFeedbackPercentage()}
               />
