@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
-import Box from 'components/Box';
 import Section from 'components/Section';
 import FeedbackOptions from 'components/FeedbackOptions';
 import Statistics from 'components/Statistics';
 import Notification from 'components/Notification';
+
+import { GlobalStyle } from './GlobalStyle';
+import { Container } from './App.styled';
 
 const App = () => {
   const [good, setGood] = useState(0);
@@ -33,16 +35,7 @@ const App = () => {
 
   return (
     <>
-      <Box
-        display="flex"
-        flexDirection="column"
-        width="1280px"
-        height="700px"
-        pt={3}
-        bg="bodyColor"
-        boxShadow="outline"
-        as="main"
-      >
+      <Container>
         <Section title={'Please leave feedback'}>
           <FeedbackOptions options={options} onLeaveFeedback={handleClick} />
         </Section>
@@ -59,7 +52,8 @@ const App = () => {
             <Notification message="There is no feedback" />
           )}
         </Section>
-      </Box>
+      </Container>
+      <GlobalStyle />
     </>
   );
 };
